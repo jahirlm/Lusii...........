@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Lusi Period Tracker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #fff0f5;
+      color: #333;
+      text-align: center;
+      margin: 0;
+      padding-bottom: 100px;
+    }
+    h1 {
+      margin-top: 30px;
+      color: #d63384;
+    }
+    input, button {
+      padding: 10px;
+      margin: 10px;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+    }
+    button {
+      background-color: #ff69b4;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #800040;
+    }
+    .footer-quote {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #ffe6ec;
+      padding: 12px 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .question-popup {
+      position: absolute;
+      background: #ffccdd;
+      padding: 15px;
+      border-radius: 10px;
+      top: 40%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      display: none;
+      z-index: 10;
+    }
+  </style>
+</head>
+<body>
+  <h1>Hi Lusi Cutie 🥰</h1>
+  <p>Track your period with love and care 💖</p>
+
+  <div>
+    <label for="lastDate">Last Period Date:</label><br>
+    <input type="date" id="lastDate"><br>
+    <label for="cycleLength">Cycle Length (days):</label><br>
+    <input type="number" id="cycleLength" value="28"><br>
+    <button onclick="predictPeriod()">Predict Next Period</button>
+  </div>
+
+  <div class="result" id="resultText"></div>
+
+  <div class="footer-quote" onclick="showPopup()">Sorry Lusi Sob kichur Jonno..<br>Please Khoma Kore daoo😔</div>
+
+  <div id="question" class="question-popup">
+    <p>Khoma korecho?</p>
+    <button onclick="handleAnswer('yes')">Yes</button>
+    <button onclick="handleAnswer('no')">No</button>
+  </div>
+
+  <script>
+    function predictPeriod() {
+      const lastDate = new Date(document.getElementById("lastDate").value);
+      const cycleLength = parseInt(document.getElementById("cycleLength").value);
+
+      if (!lastDate || isNaN(cycleLength)) {
+        document.getElementById("resultText").textContent = "Please enter valid inputs.";
+        return;
+      }
+
+      const nextPeriod = new Date(lastDate.getTime() + cycleLength * 24 * 60 * 60 * 1000);
+      document.getElementById("resultText").textContent = "Next period is likely to start on: " + nextPeriod.toDateString();
+    }
+
+    function showPopup() {
+      const q = document.getElementById('question');
+      const randomX = Math.random() * 80 + 10;
+      const randomY = Math.random() * 60 + 20;
+      q.style.left = `${randomX}%`;
+      q.style.top = `${randomY}%`;
+      q.style.display = 'block';
+    }
+
+    function handleAnswer(answer) {
+      if (answer === 'yes') {
+        alert("Tui amar jibon, ami bhalobashi tomake shotti ❤️");
+      } else {
+        showPopup();
+      }
+    }
+  </script>
+</body>
+</html>
